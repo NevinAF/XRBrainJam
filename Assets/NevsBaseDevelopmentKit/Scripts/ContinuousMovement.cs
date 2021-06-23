@@ -117,16 +117,17 @@ public class ContinuousMovement : MonoBehaviour
     {
         CapsuleFollowHeadset();
 
-        Quaternion rotation = Quaternion.Euler(0, _XRRig.cameraGameObject.transform.eulerAngles.y, 0);
-        Vector3 direction = rotation * new Vector3(inputAxis.x, 0, inputAxis.y);
-        _characterController.Move(direction * Time.fixedDeltaTime * (isSprinting ? sprintSpeed : speed));
+        Quaternion rotation = Quaternion.Euler(0, _XRRig.cameraFloorOffsetObject.transform.localEulerAngles.y, 0);
+        
 
         if (CheckGrounded())
             fallingSpeed = 0;
         else
-            fallingSpeed += gravity * Time.fixedDeltaTime;
+            fallingSpeed += (gravity) * Time.fixedDeltaTime;
 
-        _characterController.Move(Vector3.up * fallingSpeed * Time.fixedDeltaTime);
+        Vector3 direction = rotation * new Vector3(inputAxis.x * (isSprinting ? sprintSpeed : speed), fallingSpeed, inputAxis.y * (isSprinting ? sprintSpeed : speed));
+
+        _characterController.Move(direction * Time.fixedDeltaTime);
 
 
     }
