@@ -2,22 +2,40 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
+    public static SceneTransition instance;
+    public UnityEvent OnMidPoint;
+
     [Tooltip("The renderer that we want to fade in and out. Must have a '_Color' color and should react to alpha changes")]
-    public Renderer cullingSphere;
+    public Renderer[] fadeObjects;
     public float sphereFadeTime;
     public float paddingTime;
-
+    [Tooltip("This is automatically set to be the last loaded scene in the heirachy, but will be never be the first loaded scene (null if no loaded scenes)")]
     public Scene loadedScene;
 
     private void Start()
     {
-        if (SceneManager.sceneCount >= 2)
+        int lastLoadIndex = SceneManager.sceneCount-1;
+        while (lastLoadIndex > 1)
         {
-            loadedScene = SceneManager.GetSceneAt(1);
+            if (SceneManager.GetSceneAt(lastLoadIndex).isLoaded)
+            {
+                loadedScene = SceneManager.GetSceneAt(lastLoadIndex);
+                Debug.Log("Loaded Scene Name: " + loadedScene.name);
+                break;
+            }
+            lastLoadIndex--;
+        }
+
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Debug.LogError("There are two scene transition scripts in the scenes. There should only be one!");
         }
     }
 
@@ -47,19 +65,31 @@ public class SceneTransition : MonoBehaviour
         {
             mutex = false;
 
-            Color sphereColor = cullingSphere.material.color;
+            foreach (var helper in FindObjectsOfType<SceneTransitionHelper>())
+                helper.OnTransitionStart.Invoke();
+
+            Color[] fadeColors = new Color[fadeObjects.Length];
+            for (int i = 0; i <fadeObjects.Length; i++)
+                fadeColors[i] = fadeObjects[i].material.color;
+
             float counter = 0;
-            while (counter < sphereFadeTime)
+            while (counter <= sphereFadeTime)
             {
-                sphereColor.a = counter / sphereFadeTime;
-                cullingSphere.material.color = sphereColor;
-                counter += Time.deltaTime;
                 yield return null;
+
+                counter += Time.deltaTime;
+
+                for (int i = 0; i < fadeObjects.Length; i++)
+                    fadeColors[i].a = counter / sphereFadeTime;
+
+                for (int i = 0; i < fadeObjects.Length; i++)
+                    fadeObjects[i].material.color = fadeColors[i];
             }
 
+            OnMidPoint.Invoke();
 
             AsyncOperation asyncload, asyncUnoad;
-            if (loadedScene != null)
+            if (loadedScene.IsValid())
             {
                 asyncUnoad = SceneManager.UnloadSceneAsync(loadedScene);
                 asyncload = SceneManager.LoadSceneAsync(toScene, LoadSceneMode.Additive);
@@ -68,7 +98,7 @@ public class SceneTransition : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Scene transition did not unload any scenes.");
+                Debug.Log("Scene transition did not unload any scenes.");
                 asyncload = SceneManager.LoadSceneAsync(toScene, LoadSceneMode.Additive);
                 while (asyncload.isDone)
                     yield return null;
@@ -82,12 +112,17 @@ public class SceneTransition : MonoBehaviour
             }
 
             counter = 0;
-            while (counter < sphereFadeTime)
+            while (counter <= sphereFadeTime)
             {
-                sphereColor.a = 1 - (counter / sphereFadeTime);
-                cullingSphere.material.color = sphereColor;
-                counter += Time.deltaTime;
                 yield return null;
+
+                counter += Time.deltaTime;
+
+                for (int i = 0; i < fadeObjects.Length; i++)
+                    fadeColors[i].a = 1 - (counter / sphereFadeTime);
+
+                for (int i = 0; i < fadeObjects.Length; i++)
+                    fadeObjects[i].material.color = fadeColors[i];
             }
 
 
