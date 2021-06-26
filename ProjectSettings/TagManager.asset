@@ -14,10 +14,10 @@ TagManager:
   - PlayerBody
   - Water
   - UI
-  - Object
-  - 
-  - 
-  - 
+  - Grab Objects
+  - Scene Objects
+  - Bounds
+  - Interaction
   - 
   - 
   - 
