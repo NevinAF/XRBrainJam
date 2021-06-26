@@ -6,6 +6,7 @@ public class WorldConfig : ScriptableObject
 {
     public float worldMapRadius = 10;
     
+    
     private static WorldConfig _instance;
 
     public static WorldConfig Instance
