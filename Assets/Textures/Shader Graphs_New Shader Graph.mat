@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_New Shader Graph
+  m_Shader: {fileID: -6465566751694194690, guid: 77bc97b2ea8a73f47b138f16432a84b0, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_3f982b11efbe4576987b7a11786cacd4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_438070c38f1b417086bd3aad6a4c3af5:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_a8421763a7564b5daef8e1210a273185:
+        m_Texture: {fileID: 2800000, guid: 433501ae8cf3d64498970e693fde8fc8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_c8afcda64aa54dc3bf20513922bc59e6:
+        m_Texture: {fileID: 2800000, guid: c084a0e6789c60a418d71eebbd863afb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_1bf58f26b1b94cfdb8b2d2e9fa8baecc: 1
+    - Vector1_900b40f61b4d4e379a94abae417dcb5b: 0.85
+    - Vector1_92b577cd0f0b4b20a9fe7724c6af1a0a: 0.55
+    - Vector1_c9b2713418c84ec5b706ecad6f9e1604: 0
+    m_Colors:
+    - Color_5e61bf3e53bd417eac04622ed6abe37c: {r: 0.38314348, g: 0.38314348, b: 0.7735849, a: 1}
+    - Color_9a3f5af3d7e646a7b244036edba005c8: {r: 0.14812827, g: 0.40566036, b: 0, a: 1}
+  m_BuildTextureStacks: []
