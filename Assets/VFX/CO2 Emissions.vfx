@@ -1170,6 +1170,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081ffb0090424ba4cb05370a42ead6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  opaqueRenderQueue: 0
+  transparentRenderQueue: 1
 --- !u!114 &8926484042661614591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6938,7 +6946,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615013}
   m_ExposedName: Radius
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 8
   m_Category: 
   m_Min:
     m_Type:
@@ -7484,7 +7492,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615050}
   m_ExposedName: CO2 Emission
   m_Exposed: 1
-  m_Order: 8
+  m_Order: 10
   m_Category: 
   m_Min:
     m_Type:
@@ -7897,7 +7905,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615088}
   m_ExposedName: Emission Force Strength
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 6
   m_Category: Emission
   m_Min:
     m_Type:
@@ -13414,7 +13422,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615457}
   m_ExposedName: Center
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 9
   m_Category: Emission
   m_Min:
     m_Type:
@@ -17916,14 +17924,14 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661615667}
   m_ExposedName: Emission Size
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 7
   m_Category: Emission
   m_Min:
     m_Type:
