@@ -21,7 +21,7 @@ namespace Planet
         public float CO2Emissions => _localCache.co2Emissions;
         
         private PlanetState _localCache;
-
+        
         private void Awake()
         {
             if(listener == null)Debug.LogError("Planet State Events Missing a Listener", this);
@@ -40,7 +40,7 @@ namespace Planet
                     $"The Planet State Event object's listener {listener.name} is unregistered and will not be called",
                     this);
         }
-
+        
         private void CheckForEvent(float newState, float cachedState, UnityEvent<float> unityEvent)
         {
             if (Math.Abs(newState - cachedState) > Mathf.Epsilon)

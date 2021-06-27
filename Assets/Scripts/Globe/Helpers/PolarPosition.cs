@@ -4,10 +4,10 @@ using UnityEngine;
 [ExecuteAlways]
 public class PolarPosition : MonoBehaviour
 {
-    public PolarCoordinate pc;
+    public PolarCoordinate position;
 
     private void Update()
     {
-        transform.localPosition = pc.PolarToWorld();
+        transform.localPosition = position.PolarToWorld();
     }
 }
