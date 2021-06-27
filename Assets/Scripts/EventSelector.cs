@@ -85,8 +85,6 @@ public class EventSelector : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Progress:: " + progress);
-
         Selector.transform.localScale = scl;
     }
 

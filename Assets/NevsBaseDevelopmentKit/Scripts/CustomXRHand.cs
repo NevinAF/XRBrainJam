@@ -121,7 +121,7 @@ public class CustomXRHand : MonoBehaviour
         // Collisions start disabled. We'll enable it based on custom collision requirement in the update function.
         m_colliders = this.GetComponentsInChildren<Collider>().Where(childCollider => !childCollider.isTrigger).ToArray();
         foreach (Collider collider in m_colliders)
-            collider.enabled = false;
+            collider.enabled = true;
 
         // We start with no object in the users hands
         isGrabbing = false;
@@ -140,8 +140,6 @@ public class CustomXRHand : MonoBehaviour
         {
             isGrabbing = (interactor.selectTarget != null);
         }
-
-        Debug.Log(isGrabbing);
             
         UpdateInputStates();
             

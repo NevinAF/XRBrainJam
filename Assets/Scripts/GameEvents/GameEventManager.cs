@@ -83,10 +83,12 @@ public class GameEventManager : MonoBehaviour
 
         foreach (var item in currentEvents)
         {
-            if (item.isActive)
-                item.UpdateController();
-            else
-                item.IdleUpdateController();
+            changedScene = false;
+            if (!changedScene)
+                if (item.isActive)
+                    item.UpdateController();
+                else
+                    item.IdleUpdateController();
         }
         foreach (var item in queueRemove)
         {
@@ -94,42 +96,52 @@ public class GameEventManager : MonoBehaviour
         }
     }
 
+    bool changedScene;
+
     internal void ChangeScene(string sceneName)
     {
-        if (globe.TryGetComponent(out GlobeReset gr))
-            gr.WorldFadeOut();
+        changedScene = true;
+        globe.GetComponentInParent<GlobeReset>().WorldFadeOut();
 
         foreach (var item in currentEvents)
         {
             bool newActive = sceneName == item.gameEvent.sceneName;
 
-            if (item.isActive && !newActive)
+            if (!item.isActive && newActive)
                 SceneTransition.instance.OnMidPoint.AddListener(() => {
 
+                    Debug.Log("Calling enter on: " + item.gameEvent.sceneName);
+                    item.OnPlayerEnteredGameEventScene();
+                    item.isActive = newActive;
+
+                });
+            else if (item.isActive && !newActive)
+                SceneTransition.instance.OnMidPoint.AddListener(() => {
+
+                    Debug.Log("Calling exit on: " + item.gameEvent.sceneName);
                     item.isActive = newActive;
                     item.OnPlayerExitedGameEventScene();
                     
 
                 });
-            else if (!item.isActive && newActive)
-                SceneTransition.instance.OnMidPoint.AddListener(() => {
 
-                    item.OnPlayerEnteredGameEventScene();
-                    item.isActive = newActive;
 
-                });
-
-            
         }
 
         SceneTransition.instance.OnMidPoint.AddListener(() => {
 
-            SceneTransition.instance.OnMidPoint.RemoveAllListeners();
+            StartCoroutine(RemoveMids()); SceneTransition.instance.OnMidPoint.RemoveAllListeners();
 
         });
 
         SceneTransition.instance.ChangeScene(sceneName);
         OnTransition.Invoke();
+    }
+
+    private IEnumerator RemoveMids()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneTransition.instance.OnMidPoint.RemoveAllListeners();
     }
 
     private void ResolveGameEnding()
