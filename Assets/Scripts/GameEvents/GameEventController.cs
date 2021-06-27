@@ -5,36 +5,6 @@ public class GameEventController : MonoBehaviour
     public GameEvent gameEvent;
 
 
-    private float spawnTime;
-    
-    /// <summary>
-    /// called when the game event is spawned on the map
-    /// </summary>
-    void InitializeGameEvent()
-    {
-        spawnTime = Time.time;
-    }
-
-    
-    /// <summary>
-    /// called when the event scene is loaded 
-    /// </summary>
-    void OnPlayerEnteredGameEventScene()
-    {
-        
-    }
-    
-    
-    void OnPlayerExitedGameEventScene()
-    {
-        
-    }
-    
-    void OnGameEventCompleted(bool failed)
-    {
-        
-    }
-    
     
     public static GameEventController SpawnGameEventOnMap(GameEvent gameEvent, GameObject globe)
     {

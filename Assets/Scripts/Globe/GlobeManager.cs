@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Planet;
+using UnityEngine;
 
 namespace Globe
 {
@@ -26,13 +27,14 @@ namespace Globe
 
         private void Awake()
         {
-            if (_instance == null)
+            if (_instance != null && _instance != this )
             {
-                _instance = this;
+                Destroy(gameObject);
             }
             else
             {
-                Destroy(gameObject);
+                _instance = this;
+                SharedPlanetState.GlobalState.ResetPlanetToDefaultState();
             }
         }
 
