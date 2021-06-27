@@ -28,10 +28,12 @@ public class CustomXRHand : MonoBehaviour
 
     // CONSTANTS
     public const float INPUT_RATE_CHANGE = 20.0f;
-    public const float COLLIDER_SCALE_MIN = 0.01f;
+    public const float COLLIDER_SCALE_MIN = 0.0f;
     public const float COLLIDER_SCALE_MAX = 1.0f;
-    public const float COLLIDER_SCALE_PER_SECOND = 3.00f;
+    public const float COLLIDER_SCALE_PER_SECOND = 0.50f;
     public const float COLLIDER_SCALE_WAIT = 0.2f;
+
+    public XRBaseInteractor handRay;
 
     [Header("Inputs and Animation")]
     [SerializeField]
@@ -137,7 +139,7 @@ public class CustomXRHand : MonoBehaviour
     {
         if(grabberObj)
         {
-            isGrabbing = grabberObj.selectTarget != null;
+            isGrabbing = (grabberObj.selectTarget != null || handRay.selectTarget != null);
         }
             
         UpdateInputStates();
