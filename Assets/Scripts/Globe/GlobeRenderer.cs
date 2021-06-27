@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Globe
 {
     public class GlobeRenderer : MonoBehaviour
     {
