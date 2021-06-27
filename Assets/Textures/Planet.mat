@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ice_Final
+  m_Name: Planet
   m_Shader: {fileID: -6465566751694194690, guid: 12b2fb6f215a9b248bb78808dda8d7ed, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -23,8 +23,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: 7411684c409e84f45999a786ee35ed1f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_510a1ff19fc44fb28f9df021c3ce581c:
+        m_Texture: {fileID: 2800000, guid: 6f927735ac49cb24386e7cbf3b342d51, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_69fe4a439184427cb0cf827fe6e4d469:
         m_Texture: {fileID: 2800000, guid: 427869f17d6f8a041af87fead0aeae4e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_a60051e31b144ed4b70053c0de0b822d:
+        m_Texture: {fileID: 2800000, guid: f621d967b60042f4bab86f1007a2c0a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -40,11 +48,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_654692e5d01e486f9a7a0cbf24765c95: 1
-    - Vector1_974132f5d72742f4aa59b680d1c86926: 0.5
+    - Vector1_654692e5d01e486f9a7a0cbf24765c95: 0.378
+    - Vector1_6fe0b900d1f84ca6b725266737387924: 0
+    - Vector1_974132f5d72742f4aa59b680d1c86926: 1
     - Vector1_e02d4ff699174ca48e0bd6f32b47bc19: 0
     - _iceAmount: 1
     m_Colors:
     - Color_4b965875055249f98cf5301d3525fc2e: {r: 1, g: 1, b: 1, a: 0}
     - Color_ac11c2dfa7784561911b20b8eb13573b: {r: 0.25044498, g: 0.6850572, b: 0.7924528, a: 1}
+    - Color_c4f06d488d9848ccb9cd9b2145d912bd: {r: 0.2633266, g: 0.475, b: 0.14155002, a: 1}
+    - Color_c4f06d488d9848ccb9cd9b2145d912bd_1: {r: 0.426, g: 0.34477973, b: 0.193404, a: 1}
   m_BuildTextureStacks: []
