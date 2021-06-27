@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "World Config")]
+[CreateAssetMenu(menuName = "Globals/World Config")]
 public class WorldConfig : ScriptableObject
 {
     public float worldMapRadius = 10;
