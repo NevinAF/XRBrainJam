@@ -202,6 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5981289446696055965}
+  - component: {fileID: 417681012}
   m_Layer: 0
   m_Name: Player Globe System 1
   m_TagString: Untagged
@@ -228,6 +229,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &417681012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7301955638645451127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e223df256f1424fbe6d652e4d8668c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meltBeginTemperature: 0
+  absoluteMaxTemperature: 10000
+  co2Threshold: 100
+  co2Max: 2000
+  co2TemperatureIncreaseRate: 5
+  co2TemperatureDecreaseRate: -5
+  maxMeltRate: 5
+  meltCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  isTempIncreasing: 0
 --- !u!1 &8999127662580154842
 GameObject:
   m_ObjectHideFlags: 0
