@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a3a62a678447978b0c1861210c96a7, type: 3}
   m_Name: World Config
   m_EditorClassIdentifier: 
-  worldMapRadius: 0.3
+  worldMapRadius: 0.45
