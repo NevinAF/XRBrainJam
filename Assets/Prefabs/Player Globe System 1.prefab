@@ -5758,6 +5758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3717985bedc70a4893b14c09b9358b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handRay: {fileID: 0}
   m_controllerCharacteristics: 4
   m_animator: {fileID: 8999127663769098010}
   m_defaultGrabPose: {fileID: 533046744552873745, guid: 2117005455660eb4b9f96722e90090d6, type: 3}
@@ -6886,6 +6887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3717985bedc70a4893b14c09b9358b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handRay: {fileID: 0}
   m_controllerCharacteristics: 5
   m_animator: {fileID: 8999127663549952650}
   m_defaultGrabPose: {fileID: 533046744552873745, guid: 2117005455660eb4b9f96722e90090d6, type: 3}

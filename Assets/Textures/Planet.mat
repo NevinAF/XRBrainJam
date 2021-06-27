@@ -50,11 +50,11 @@ Material:
     m_Floats:
     - Vector1_654692e5d01e486f9a7a0cbf24765c95: 0.378
     - Vector1_6fe0b900d1f84ca6b725266737387924: 0
-    - Vector1_974132f5d72742f4aa59b680d1c86926: 1
+    - Vector1_974132f5d72742f4aa59b680d1c86926: 0.919
     - Vector1_e02d4ff699174ca48e0bd6f32b47bc19: 0
     - _iceAmount: 1
     m_Colors:
-    - Color_4b965875055249f98cf5301d3525fc2e: {r: 1, g: 1, b: 1, a: 0}
+    - Color_4b965875055249f98cf5301d3525fc2e: {r: 1, g: 1, b: 1, a: 1}
     - Color_ac11c2dfa7784561911b20b8eb13573b: {r: 0.25044498, g: 0.6850572, b: 0.7924528, a: 1}
     - Color_c4f06d488d9848ccb9cd9b2145d912bd: {r: 0.2633266, g: 0.475, b: 0.14155002, a: 1}
     - Color_c4f06d488d9848ccb9cd9b2145d912bd_1: {r: 0.426, g: 0.34477973, b: 0.193404, a: 1}
