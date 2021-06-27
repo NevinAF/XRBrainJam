@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1a997ab914c46d1458ee5164aaf1d35d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb60230bf05344b4e8997236931be411, type: 2}
     - target: {fileID: 919132149155446097, guid: 1a997ab914c46d1458ee5164aaf1d35d, type: 3}
       propertyPath: m_Name
       value: FBX_Island_Tree_Trunk_V1
