@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameEventManager : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class GameEventManager : MonoBehaviour
     public GameObject globe;
     public int seed;
 
+    public UnityEvent OnEventSpawn;
+    public UnityEvent OnTransition;
+    public UnityEvent OnEventComplete;
+    public UnityEvent OnGameComplete;
+
     private float startTime;
     private int index;
     private List<GameEventController> currentEvents;
+    private List<GameEventController> queueRemove;
 
 
 
@@ -29,6 +36,7 @@ public class GameEventManager : MonoBehaviour
         startTime = Time.time;
         index = 0;
         currentEvents = new List<GameEventController>();
+        queueRemove = new List<GameEventController>();
     }
 
     private void Update()
@@ -40,6 +48,7 @@ public class GameEventManager : MonoBehaviour
             {
                 // Game Won!!
                 ResolveGameEnding();
+                this.enabled = false;
             }
 
         }
@@ -51,14 +60,23 @@ public class GameEventManager : MonoBehaviour
                 {
                     if (gameController.gameEvent == Events[index].Event)
                     {
+                        OnEventSpawn.Invoke();
                         gameController.OnDoubleSpawn();
                         doubleSpawn = true;
                         break;
                     }
                 }
-                    
+
                 if (!doubleSpawn)
+                {
+                    OnEventSpawn.Invoke();
                     currentEvents.Add(GameEventController.SpawnGameEventOnMap(Events[index].Event, globe));
+                    if (SceneTransition.instance.loadedScene.name == Events[index].Event.sceneName)
+                    {
+                        currentEvents[currentEvents.Count - 1].OnPlayerEnteredGameEventScene();
+                        currentEvents[currentEvents.Count - 1].isActive = true;
+                    }
+                }
                 index++;
 
             }
@@ -70,10 +88,17 @@ public class GameEventManager : MonoBehaviour
             else
                 item.IdleUpdateController();
         }
+        foreach (var item in queueRemove)
+        {
+            currentEvents.Remove(item);
+        }
     }
 
     internal void ChangeScene(string sceneName)
     {
+        if (globe.TryGetComponent(out GlobeReset gr))
+            gr.WorldFadeOut();
+
         foreach (var item in currentEvents)
         {
             bool newActive = sceneName == item.gameEvent.sceneName;
@@ -83,6 +108,7 @@ public class GameEventManager : MonoBehaviour
 
                     item.isActive = newActive;
                     item.OnPlayerExitedGameEventScene();
+                    
 
                 });
             else if (!item.isActive && newActive)
@@ -103,18 +129,29 @@ public class GameEventManager : MonoBehaviour
         });
 
         SceneTransition.instance.ChangeScene(sceneName);
+        OnTransition.Invoke();
     }
 
     private void ResolveGameEnding()
     {
         Debug.Log("Game is Over! You won!");
 
-        throw new NotImplementedException();
+        OnGameComplete.Invoke();
+    }
+
+    public void Restart()
+    {
+        startTime = Time.time;
+        index = 0;
+        this.enabled = true;
     }
 
     public void GameEventControllerCompleted(GameEventController gameEventController)
     {
-        Debug.Assert(currentEvents.Remove(gameEventController), "Could not fine gameEventController apart of the GameManager. Trying to ");
+        Debug.Assert(currentEvents.Contains(gameEventController), "Could not fine gameEventController apart of the GameManager. Trying to ");
+        queueRemove.Add(gameEventController);
+
+        OnEventComplete.Invoke();
     }
 
 

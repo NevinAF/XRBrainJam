@@ -10,6 +10,7 @@ public class EventSelector : MonoBehaviour
     public float selectTime;
     public Color ActiveColor;
     public ScaleAxis scaleAxis;
+    public AudioSource audioSource;
     public enum ScaleAxis { None, X, Y, Z, XY, XZ, YZ, XYZ }
 
     private float timeCounter;
@@ -34,7 +35,10 @@ public class EventSelector : MonoBehaviour
 
         }
         numberEnter++;
-        
+
+        audioSource.Play();
+
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -102,5 +106,6 @@ public class EventSelector : MonoBehaviour
             }
         }
 
+        audioSource.Stop();
     }
 }

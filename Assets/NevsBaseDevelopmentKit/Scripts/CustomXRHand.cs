@@ -71,7 +71,7 @@ public class CustomXRHand : MonoBehaviour
     /// <summary>
     /// Used for object specific gabbing poses.
     /// </summary>
-    private XRDirectInteractor grabberObj;
+    private XRDirectInteractor interactor;
 
     // ANIMATION LAYER VALUES
     // The input values determine how the animator blends these different layers. Look at "UpdateAnimStates()" for specifics.
@@ -113,16 +113,15 @@ public class CustomXRHand : MonoBehaviour
         InputDeviceWrapper.FindInputDevice(m_controllerCharacteristics, out targetDevice, this);
 
         //TODO:: Update this so it is not dependent on this specific instanciation.
-        grabberObj = transform.parent.GetComponentInParent<XRDirectInteractor>();
+        interactor = transform.parent.GetComponentInParent<XRDirectInteractor>();
 
         // Set up colliders for collisions.
         m_collisionEnabled = false;
-        if(m_TrackCollisions)
-        {
-            // Collisions start disabled. We'll enable it based on custom collision requirement in the update function.
-            m_colliders = this.GetComponentsInChildren<Collider>().Where(childCollider => !childCollider.isTrigger).ToArray();
-            CollisionEnable(m_collisionEnabled);
-        }
+
+        // Collisions start disabled. We'll enable it based on custom collision requirement in the update function.
+        m_colliders = this.GetComponentsInChildren<Collider>().Where(childCollider => !childCollider.isTrigger).ToArray();
+        foreach (Collider collider in m_colliders)
+            collider.enabled = false;
 
         // We start with no object in the users hands
         isGrabbing = false;
@@ -137,10 +136,12 @@ public class CustomXRHand : MonoBehaviour
 
     private void Update()
     {
-        if(grabberObj)
+        if(interactor)
         {
-            isGrabbing = (grabberObj.selectTarget != null || handRay.selectTarget != null);
+            isGrabbing = (interactor.selectTarget != null);
         }
+
+        Debug.Log(isGrabbing);
             
         UpdateInputStates();
             

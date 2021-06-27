@@ -35,8 +35,9 @@ public abstract class GameEventController : MonoBehaviour
             polarPos = instance.AddComponent<PolarPosition>();
         }
         polarPos.position = gameEvent.globeLocation;
-        
-        Debug.Assert(instance.TryGetComponent<GameEventController>(out GameEventController controller));
+
+        bool assert = instance.TryGetComponent<GameEventController>(out GameEventController controller);
+        Debug.Assert(assert);
         controller.gameEvent = gameEvent;
         controller.SpawnTime = Time.time;
         controller.OnInitializeGameEvent();

@@ -53,6 +53,7 @@ public class GlobeReset : MonoBehaviour
             StartCoroutine(WorldFadeOutCoroutine());
             while (fading)
                 yield return null;
+            fading = true;
         }
 
         if (TryGetComponent(out Rigidbody rb))
