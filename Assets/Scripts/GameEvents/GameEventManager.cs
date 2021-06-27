@@ -107,21 +107,21 @@ public class GameEventManager : MonoBehaviour
         {
             bool newActive = sceneName == item.gameEvent.sceneName;
 
-            if (!item.isActive && newActive)
-                SceneTransition.instance.OnMidPoint.AddListener(() => {
-
-                    Debug.Log("Calling enter on: " + item.gameEvent.sceneName);
-                    item.OnPlayerEnteredGameEventScene();
-                    item.isActive = newActive;
-
-                });
-            else if (item.isActive && !newActive)
+            if (item.isActive && !newActive)
                 SceneTransition.instance.OnMidPoint.AddListener(() => {
 
                     Debug.Log("Calling exit on: " + item.gameEvent.sceneName);
                     item.isActive = newActive;
                     item.OnPlayerExitedGameEventScene();
-                    
+
+
+                });
+            else if (!item.isActive && newActive)
+                SceneTransition.instance.OnMidPoint.AddListener(() => {
+
+                    Debug.Log("Calling enter on: " + item.gameEvent.sceneName);
+                    item.OnPlayerEnteredGameEventScene();
+                    item.isActive = newActive;
 
                 });
 

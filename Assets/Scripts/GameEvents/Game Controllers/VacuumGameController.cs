@@ -29,9 +29,8 @@ public class VacuumGameController : GameEventController
 
     public override void OnPlayerEnteredGameEventScene()
     {
-        Debug.Log("gra spawned");
+        
         garbageCollection = new GameObject("GarbageCollection").transform;
-        SceneManager.MoveGameObjectToScene(garbageCollection.gameObject, SceneTransition.instance.loadedScene);
 
         for (int i = 0; i < objectCountNumber; i++)
             SpawnGarbageObject();

@@ -107,6 +107,8 @@ public class SceneTransition : MonoBehaviour
             }
             
             loadedScene = SceneManager.GetSceneByName(toScene);
+
+            yield return null;
             OnMidPoint.Invoke();
 
             
