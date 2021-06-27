@@ -81,6 +81,7 @@ public struct PolarCoordinate
         var position = Quaternion.Euler(polar.longitude, polar.latitude, 0) * identity;
         return position;
     }
+
     public Vector3 PolarToWorld()
     {
         Vector3 right = Vector3.right;
@@ -90,8 +91,5 @@ public struct PolarCoordinate
         var position = Quaternion.Euler(longitude, latitude, 0) * identity;
         return position;
     }
-    // public PolarCoordinate WorldToPolar(Vector3 world)
-    // {
-    //     
-    // }
+    
 }
