@@ -16,7 +16,6 @@ public class GlobeReset : MonoBehaviour
     {
         counter = 0;
         OriginalScale = transform.localScale;
-        transform.localScale = Vector3.zero;
     }
 
     private void Update()
@@ -53,6 +52,7 @@ public class GlobeReset : MonoBehaviour
             StartCoroutine(WorldFadeOutCoroutine());
             while (fading)
                 yield return null;
+            fading = true;
         }
 
         if (TryGetComponent(out Rigidbody rb))

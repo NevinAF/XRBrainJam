@@ -141,7 +141,7 @@ MonoBehaviour:
   selectTime: 2.3
   ActiveColor: {r: 0.34763262, g: 0.8490566, b: 0.3512052, a: 1}
   scaleAxis: 1
-  audioSource: {fileID: 1521451456765105217}
+  audioSource: {fileID: 5471017952198187612}
   OnSelected:
     m_PersistentCalls:
       m_Calls:
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Text: 'Go to Event!
 
 
-    <i>Ugly Water Scene</i>'
+    <i>Island 2</i>'
 --- !u!1 &8396097618570309191
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,9 +455,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8396097618570309189}
   - component: {fileID: 8396097618570309188}
-  - component: {fileID: 1521451456765105217}
+  - component: {fileID: 5471017952198187612}
   m_Layer: 0
-  m_Name: VacuumGameEvent
+  m_Name: VacuumGameEvent 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -529,7 +529,7 @@ MonoBehaviour:
   spawnIntervalRange: 3
   spawnInnerRadius: 1
   spawnOuterRadius: 10
---- !u!82 &1521451456765105217
+--- !u!82 &5471017952198187612
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

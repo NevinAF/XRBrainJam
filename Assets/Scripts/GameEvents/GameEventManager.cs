@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameEventManager : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class GameEventManager : MonoBehaviour
     public GameObject globe;
     public int seed;
 
+    public UnityEvent OnEventSpawn;
+    public UnityEvent OnTransition;
+    public UnityEvent OnEventComplete;
+    public UnityEvent OnGameComplete;
+
     private float startTime;
     private int index;
     private List<GameEventController> currentEvents;
+    private List<GameEventController> queueRemove;
 
 
 
@@ -29,6 +36,7 @@ public class GameEventManager : MonoBehaviour
         startTime = Time.time;
         index = 0;
         currentEvents = new List<GameEventController>();
+        queueRemove = new List<GameEventController>();
     }
 
     private void Update()
@@ -40,6 +48,7 @@ public class GameEventManager : MonoBehaviour
             {
                 // Game Won!!
                 ResolveGameEnding();
+                this.enabled = false;
             }
 
         }
@@ -51,70 +60,110 @@ public class GameEventManager : MonoBehaviour
                 {
                     if (gameController.gameEvent == Events[index].Event)
                     {
+                        OnEventSpawn.Invoke();
                         gameController.OnDoubleSpawn();
                         doubleSpawn = true;
                         break;
                     }
                 }
-                    
+
                 if (!doubleSpawn)
+                {
+                    OnEventSpawn.Invoke();
                     currentEvents.Add(GameEventController.SpawnGameEventOnMap(Events[index].Event, globe));
+                    if (SceneTransition.instance.loadedScene.name == Events[index].Event.sceneName)
+                    {
+                        currentEvents[currentEvents.Count - 1].OnPlayerEnteredGameEventScene();
+                        currentEvents[currentEvents.Count - 1].isActive = true;
+                    }
+                }
                 index++;
 
             }
 
         foreach (var item in currentEvents)
         {
-            if (item.isActive)
-                item.UpdateController();
-            else
-                item.IdleUpdateController();
+            changedScene = false;
+            if (!changedScene)
+                if (item.isActive)
+                    item.UpdateController();
+                else
+                    item.IdleUpdateController();
+        }
+        foreach (var item in queueRemove)
+        {
+            currentEvents.Remove(item);
         }
     }
 
+    bool changedScene;
+
     internal void ChangeScene(string sceneName)
     {
+        changedScene = true;
+        globe.GetComponentInParent<GlobeReset>().WorldFadeOut();
+
         foreach (var item in currentEvents)
         {
             bool newActive = sceneName == item.gameEvent.sceneName;
 
-            if (item.isActive && !newActive)
+            if (!item.isActive && newActive)
                 SceneTransition.instance.OnMidPoint.AddListener(() => {
 
-                    item.isActive = newActive;
-                    item.OnPlayerExitedGameEventScene();
-
-                });
-            else if (!item.isActive && newActive)
-                SceneTransition.instance.OnMidPoint.AddListener(() => {
-
+                    Debug.Log("Calling enter on: " + item.gameEvent.sceneName);
                     item.OnPlayerEnteredGameEventScene();
                     item.isActive = newActive;
 
                 });
+            else if (item.isActive && !newActive)
+                SceneTransition.instance.OnMidPoint.AddListener(() => {
 
-            
+                    Debug.Log("Calling exit on: " + item.gameEvent.sceneName);
+                    item.isActive = newActive;
+                    item.OnPlayerExitedGameEventScene();
+                    
+
+                });
+
+
         }
 
         SceneTransition.instance.OnMidPoint.AddListener(() => {
 
-            SceneTransition.instance.OnMidPoint.RemoveAllListeners();
+            StartCoroutine(RemoveMids()); SceneTransition.instance.OnMidPoint.RemoveAllListeners();
 
         });
 
         SceneTransition.instance.ChangeScene(sceneName);
+        OnTransition.Invoke();
+    }
+
+    private IEnumerator RemoveMids()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneTransition.instance.OnMidPoint.RemoveAllListeners();
     }
 
     private void ResolveGameEnding()
     {
         Debug.Log("Game is Over! You won!");
 
-        throw new NotImplementedException();
+        OnGameComplete.Invoke();
+    }
+
+    public void Restart()
+    {
+        startTime = Time.time;
+        index = 0;
+        this.enabled = true;
     }
 
     public void GameEventControllerCompleted(GameEventController gameEventController)
     {
-        Debug.Assert(currentEvents.Remove(gameEventController), "Could not fine gameEventController apart of the GameManager. Trying to ");
+        Debug.Assert(currentEvents.Contains(gameEventController), "Could not fine gameEventController apart of the GameManager. Trying to ");
+        queueRemove.Add(gameEventController);
+
+        OnEventComplete.Invoke();
     }
 
 

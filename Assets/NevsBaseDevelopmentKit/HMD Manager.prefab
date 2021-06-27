@@ -66,6 +66,7 @@ MonoBehaviour:
   selectTime: 1.4
   ActiveColor: {r: 0.17586327, g: 0.6132076, b: 0.29553178, a: 1}
   scaleAxis: 4
+  audioSource: {fileID: 0}
   OnSelected:
     m_PersistentCalls:
       m_Calls:
@@ -2016,7 +2017,7 @@ PrefabInstance:
       objectReference: {fileID: 1041654449}
     - target: {fileID: 3969534244263624564, guid: 43bcf927eb71c534d9e346d34323e769, type: 3}
       propertyPath: m_TrackCollisions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4203524141263756492, guid: 43bcf927eb71c534d9e346d34323e769, type: 3}
       propertyPath: m_Layer
@@ -2088,7 +2089,7 @@ PrefabInstance:
       objectReference: {fileID: 2110231573}
     - target: {fileID: 4994931806480898823, guid: 43bcf927eb71c534d9e346d34323e769, type: 3}
       propertyPath: m_TrackCollisions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5050399928458981099, guid: 43bcf927eb71c534d9e346d34323e769, type: 3}
       propertyPath: m_Layer

@@ -11,9 +11,21 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/SteamVR/InteractionSystem/Samples/Interactions_Example.unity
     guid: e3b77830391f10343929883b18f4d5ae
-  - enabled: 1
+  - enabled: 0
     path: Assets/NevsBaseDevelopmentKit/Scenes/Testing Scene.unity
     guid: ef81094a2cf5c5f42aee5c918813e5ce
+  - enabled: 1
+    path: Assets/Scenes/Demos/DemoManagerScene.unity
+    guid: 4b7f8072e7b8c314a84ddc55981f584f
+  - enabled: 1
+    path: Assets/Scenes/Island Scene.unity
+    guid: bff149f1f21aebe46bac9a17e24ff774
+  - enabled: 1
+    path: Assets/Scenes/Demos/Test Vac Scene.unity
+    guid: 014737b98b19ba245b9eb0694d0146e9
+  - enabled: 1
+    path: Assets/Scenes/Island Scene (clone).unity
+    guid: 60ca3b86313e8254da444d273649df5c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 20c99c836ba8d6a4d9087c8cdfe96458, type: 2}
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: c3de075d925473e45b7298f0f80a0989, type: 2}

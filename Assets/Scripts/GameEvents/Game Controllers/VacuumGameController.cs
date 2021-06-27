@@ -29,6 +29,7 @@ public class VacuumGameController : GameEventController
 
     public override void OnPlayerEnteredGameEventScene()
     {
+        Debug.Log("gra spawned");
         garbageCollection = new GameObject("GarbageCollection").transform;
         SceneManager.MoveGameObjectToScene(garbageCollection.gameObject, SceneTransition.instance.loadedScene);
 
@@ -53,22 +54,23 @@ public class VacuumGameController : GameEventController
 
     public override void UpdateController()
     {
-        if (garbageCollection.childCount <= solveNumber)
-        {
-            OnGameEventCompleted();
-
-        }
-        else
-        {
-            while (nextSpawnTime < Time.time)
+        if (isActive)
+            if (garbageCollection.childCount <= solveNumber)
             {
-                SpawnGarbageObject();
+                OnGameEventCompleted();
 
-                nextSpawnTime += spawnInterval + (float)((0.5 - random.NextDouble()) * spawnIntervalRange);
             }
+            else
+            {
+                while (nextSpawnTime < Time.time)
+                {
+                    SpawnGarbageObject();
 
-            UpdateGlobleState();
-        }
+                    nextSpawnTime += spawnInterval + (float)((0.5 - random.NextDouble()) * spawnIntervalRange);
+                }
+
+                UpdateGlobleState();
+            }
     }
 
     public override void IdleUpdateController()
@@ -86,10 +88,6 @@ public class VacuumGameController : GameEventController
     public void UpdateGlobleState()
     {
         int objCount = (isActive) ? garbageCollection.childCount : objectCountNumber;
-
-
-
-        Debug.Log("This is the Impact Value: " + capacityImapctCurve.Evaluate(objCount / (float)failureNumber));
     }
 
     private void SpawnGarbageObject()
