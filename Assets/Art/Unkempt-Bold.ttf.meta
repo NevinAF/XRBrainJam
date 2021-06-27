@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: c8ae79c285630f9418a37adae7d457a4
+=======
+guid: 738e88225fea6064983101e6aad3c92e
+>>>>>>> Stashed changes
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +15,11 @@ TrueTypeFontImporter:
   fontNames:
   - Unkempt
   fallbackFontReferences:
+<<<<<<< Updated upstream
   - {fileID: 12800000, guid: a237fb77074dff54b9acd8359a51f1b8, type: 3}
+=======
+  - {fileID: 12800000, guid: f13484599efca314d814d21f9cf7e858, type: 3}
+>>>>>>> Stashed changes
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
