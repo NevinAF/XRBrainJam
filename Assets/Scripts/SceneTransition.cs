@@ -86,24 +86,31 @@ public class SceneTransition : MonoBehaviour
                     fadeObjects[i].material.color = fadeColors[i];
             }
 
-            OnMidPoint.Invoke();
 
-            AsyncOperation asyncload, asyncUnoad;
+
+            AsyncOperation async;
             if (loadedScene.IsValid())
             {
-                asyncUnoad = SceneManager.UnloadSceneAsync(loadedScene);
-                asyncload = SceneManager.LoadSceneAsync(toScene, LoadSceneMode.Additive);
-                while (asyncUnoad.isDone && asyncload.isDone)
+                async = SceneManager.UnloadSceneAsync(loadedScene);
+                while (!async.isDone)
+                    yield return null;
+                async = SceneManager.LoadSceneAsync(toScene, LoadSceneMode.Additive);
+                while (!async.isDone)
                     yield return null;
             }
             else
             {
                 Debug.Log("Scene transition did not unload any scenes.");
-                asyncload = SceneManager.LoadSceneAsync(toScene, LoadSceneMode.Additive);
-                while (asyncload.isDone)
+                async = SceneManager.LoadSceneAsync(toScene, LoadSceneMode.Additive);
+                while (!async.isDone)
                     yield return null;
             }
-                
+            
+            loadedScene = SceneManager.GetSceneByName(toScene);
+            OnMidPoint.Invoke();
+
+            
+
             counter = 0;
             while (counter < paddingTime)
             {
@@ -126,7 +133,7 @@ public class SceneTransition : MonoBehaviour
             }
 
 
-            loadedScene = SceneManager.GetSceneByName(toScene);
+
             mutex = true;
         }
     }
