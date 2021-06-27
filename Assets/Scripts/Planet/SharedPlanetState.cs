@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 #if UNITY_EDITOR
+using Planet;
 using UnityEditor;
 #endif
 using UnityEngine;
@@ -45,10 +46,7 @@ namespace Planet
                 if (value.Equals(_state) == false)
                 {
                     _state = value;
-                    foreach (var stateListener in listeners)
-                    {
-                        stateListener.OnPlanetStateChanged?.Invoke(_state);
-                    }
+                    BroadcastState();
                 }
                 _state = value;
             }
@@ -82,7 +80,13 @@ namespace Planet
             }
         }
 
-
+        public void BroadcastState()
+        {
+            foreach (var stateListener in listeners)
+            {
+                stateListener.OnPlanetStateChanged?.Invoke(_state);
+            }
+        }
         public void ResetPlanetToDefaultState()
         {
             currentState = new PlanetState()
@@ -96,7 +100,7 @@ namespace Planet
 }
 
 
-public class DisableInPlay : Attribute
+public class DisableInPlay : PropertyAttribute
 {
     
 }
@@ -110,6 +114,22 @@ public class DisableInPlayDrawer : PropertyDrawer
         EditorGUI.BeginDisabledGroup(Application.isPlaying);
         base.OnGUI(position, property, label);
         EditorGUI.EndDisabledGroup();
+    }
+}
+
+[CustomEditor(typeof(SharedPlanetState))]
+public class SharedPlanetStateEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        EditorGUI.BeginChangeCheck();
+        base.OnInspectorGUI();
+        if (EditorGUI.EndChangeCheck())
+        {
+            (target as SharedPlanetState).BroadcastState();
+        }
+        
+        
     }
 }
 #endif
